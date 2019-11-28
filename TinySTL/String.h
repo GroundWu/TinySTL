@@ -8,7 +8,7 @@
 
 #include <cstring>
 #include <type_traits>
-
+#include <iostream>
 namespace TinySTL{
 	
 	//the class of string
