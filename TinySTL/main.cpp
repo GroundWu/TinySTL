@@ -1,5 +1,5 @@
 #include <iostream>
-
+/*
 #include "Algorithm.h"
 #include "Profiler\Profiler.h"
 
@@ -28,9 +28,11 @@
 #include "Test\VectorTest.h"
 
 using namespace TinySTL::Profiler;
+*/
+#include "./allocValidate.h"
 
 int main(){
-	TinySTL::AlgorithmTest::testAllCases();
+	/*TinySTL::AlgorithmTest::testAllCases();
 	TinySTL::AVLTreeTest::testAllCases();
 	TinySTL::BitmapTest::testAllCases();
 	TinySTL::BinarySearchTreeTest::testAllCases();
@@ -52,8 +54,8 @@ int main(){
 	TinySTL::UFSetTest::testAllCases();
 	TinySTL::UniquePtrTest::testAllCases();
 	TinySTL::Unordered_setTest::testAllCases();
-	TinySTL::VectorTest::testAllCases();
-	 
+	TinySTL::VectorTest::testAllCases();*/
+	TinySTL::AllocValid::testUnionObj();
 	system("pause");
 	return 0;
 }

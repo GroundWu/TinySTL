@@ -28,6 +28,9 @@
     <Filter Include="TestData">
       <UniqueIdentifier>{676114e9-f556-46bf-9f51-65d820758de2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Validation">
+      <UniqueIdentifier>{6e931124-0107-43e9-b338-0d0881952121}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Profiler\Profiler.cpp">
@@ -304,6 +307,9 @@
     </ClInclude>
     <ClInclude Include="Test\TypeTraitsTest.h">
       <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="allocValidate.h">
+      <Filter>Validation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

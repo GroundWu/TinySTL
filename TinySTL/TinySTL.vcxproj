@@ -113,6 +113,7 @@
     <ClInclude Include="Algorithm.h" />
     <ClInclude Include="Alloc.h" />
     <ClInclude Include="Allocator.h" />
+    <ClInclude Include="allocValidate.h" />
     <ClInclude Include="AVLTree.h" />
     <ClInclude Include="BinarySearchTree.h" />
     <ClInclude Include="Bitmap.h" />

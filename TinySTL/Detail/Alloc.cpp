@@ -11,16 +11,21 @@ namespace TinySTL{
 	};
 
 	void *alloc::allocate(size_t bytes){
+		//若需要的内存大于128，直接使用malloc分配
 		if (bytes > EMaxBytes::MAXBYTES){
 			return malloc(bytes);
 		}
+
+		//需要的内存小于128，考虑进行以下的操作
 		size_t index = FREELIST_INDEX(bytes);
 		obj *list = free_list[index];
+
 		if (list){//此list还有空间给我们
 			free_list[index] = list->next;
 			return list;
 		}
 		else{//此list没有足够的空间，需要从内存池里面取空间
+			//调用refill为free_list填充空间
 			return refill(ROUND_UP(bytes));
 		}
 	}
@@ -93,13 +98,18 @@ namespace TinySTL{
 		}
 		else{//内存池剩余空间连一个区块的大小都无法提供
 			size_t bytes_to_get = 2 * total_bytes + ROUND_UP(heap_size >> 4);
+			//内存池中还剩余一点空间，先配给适当的free_list
 			if (bytes_left > 0){
 				obj **my_free_list = free_list + FREELIST_INDEX(bytes_left);
 				((obj *)start_free)->next = *my_free_list;
 				*my_free_list = (obj *)start_free;
 			}
+			//配置heap空间，用来补充内存池
 			start_free = (char *)malloc(bytes_to_get);
-			if (!start_free){
+			//heap空间不足，malloc()失败
+			if (start_free == 0){
+				//找出并释放free_list中尚未使用区块（这里是从最小的区块开始释放，STL源码中是从bytes开始找）,
+				//返还给内存池，最后递归调用自己
 				obj **my_free_list = 0, *p = 0;
 				for (int i = 0; i <= EMaxBytes::MAXBYTES; i += EAlign::ALIGN){
 					my_free_list = free_list + FREELIST_INDEX(i);
@@ -111,8 +121,12 @@ namespace TinySTL{
 						return chunk_alloc(bytes, nobjs);
 					}
 				}
+				//找不到符合要求的区块
 				end_free = 0;
 			}
+
+			//malloc分配内存成功，修改heap_size和end_free,最后递归调用自己
+			//随着调用malloc次数越多，heap_size增长，每次分配的内存会增多
 			heap_size += bytes_to_get;
 			end_free = start_free + bytes_to_get;
 			return chunk_alloc(bytes, nobjs);

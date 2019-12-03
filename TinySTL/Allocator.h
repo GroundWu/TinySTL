@@ -53,6 +53,7 @@ namespace TinySTL{
 		alloc::deallocate(static_cast<void *>(ptr), sizeof(T)* n);
 	}
 
+	// placement new
 	template<class T>
 	void allocator<T>::construct(T *ptr){
 		new(ptr)T();
@@ -61,6 +62,8 @@ namespace TinySTL{
 	void allocator<T>::construct(T *ptr, const T& value){
 		new(ptr)T(value);
 	}
+
+	//Îö¹¹º¯Êý
 	template<class T>
 	void allocator<T>::destroy(T *ptr){
 		ptr->~T();
