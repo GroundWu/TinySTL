@@ -61,6 +61,8 @@ namespace TinySTL{
 		typedef Reference	reference;
 	};
 
+
+	// traits编程
 	template<class Iterator>
 	struct iterator_traits
 	{
@@ -70,6 +72,8 @@ namespace TinySTL{
 		typedef typename Iterator::pointer				pointer;
 		typedef typename Iterator::reference 			reference;
 	};
+
+	// 萃取原生指针型别
 	template<class T>
 	struct iterator_traits<T*>
 	{
@@ -79,6 +83,7 @@ namespace TinySTL{
 		typedef T*							pointer;
 		typedef T& 							reference;
 	};
+
 	template<class T>
 	struct iterator_traits<const T*>
 	{

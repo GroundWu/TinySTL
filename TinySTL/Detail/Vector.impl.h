@@ -21,10 +21,14 @@ namespace TinySTL{
 		//处理指针和数字间的区别的函数
 		vector_aux(first, last, typename std::is_integral<InputIterator>::type());
 	}
+	
+	// 拷贝构造函数
 	template<class T, class Alloc>
 	vector<T, Alloc>::vector(const vector& v){
 		allocateAndCopy(v.start_, v.finish_);
 	}
+
+	// type&&---右值引用；移动构造函数
 	template<class T, class Alloc>
 	vector<T, Alloc>::vector(vector&& v){
 		start_ = v.start_;
@@ -32,6 +36,7 @@ namespace TinySTL{
 		endOfStorage_ = v.endOfStorage_;
 		v.start_ = v.finish_ = v.endOfStorage_ = 0;
 	}
+
 	template<class T, class Alloc>
 	vector<T, Alloc>& vector<T, Alloc>::operator = (const vector& v){
 		if (this != &v){
@@ -39,6 +44,7 @@ namespace TinySTL{
 		}
 		return *this;
 	}
+
 	template<class T, class Alloc>
 	vector<T, Alloc>& vector<T, Alloc>::operator = (vector&& v){
 		if (this != &v){
