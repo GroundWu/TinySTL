@@ -169,7 +169,7 @@ namespace TinySTL{
 		difference_type locationNeed = distance(first, last);//last - first;
 		// 如果剩余的空间大于等于插入需要的空间
 		// copy是依次调用重载运算符，unintialized_copy是依次调用拷贝构造函数；
-		// copy适合对已经初始化的空间进行拷贝，unintialized_copy适合对未初始化的空间进行拷贝
+		//  copy适合对已经初始化的空间进行拷贝，unintialized_copy适合对未初始化的空间进行拷贝
 		if (locationLeft >= locationNeed){
 			// 插入点之后的元素数量大于等于插入的数量
 			if (finish_ - position > locationNeed){

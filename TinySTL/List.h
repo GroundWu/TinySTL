@@ -13,11 +13,13 @@ namespace TinySTL{
 	class list;
 	namespace Detail{
 		//the class of node
+		// Ë«ÏòÁ´±í
 		template<class T>
 		struct node{
 			T data;
 			node *prev;
 			node *next;
+			// £¿£¿
 			list<T> *container;
 			node(const T& d, node *p, node *n, list<T> *c):
 				data(d), prev(p), next(n), container(c){}

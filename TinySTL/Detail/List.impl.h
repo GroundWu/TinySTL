@@ -3,11 +3,13 @@
 
 namespace TinySTL{
 	namespace Detail{
+		// 前置自增：++x
 		template<class T>
 		listIterator<T>& listIterator<T>::operator++(){
 			p = p->next;
 			return *this;
 		}
+		// 后置自增：x++
 		template<class T>
 		listIterator<T> listIterator<T>::operator++(int){
 			auto res = *this;
@@ -57,7 +59,7 @@ namespace TinySTL{
 	}
 	template<class T>
 	void list<T>::deleteNode(nodePtr p){
-		p->prev = p->next = nullptr;
+		p->prev = p->next = nullptr; 
 		nodeAllocator::destroy(p);
 		nodeAllocator::deallocate(p);
 	}
