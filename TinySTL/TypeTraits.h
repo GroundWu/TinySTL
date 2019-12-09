@@ -16,6 +16,7 @@ namespace TinySTL{
 		};
 	}
 
+	// 用于触发类型推断，选择对应的重载函数
 	struct _true_type { };
 	struct _false_type { };
 
