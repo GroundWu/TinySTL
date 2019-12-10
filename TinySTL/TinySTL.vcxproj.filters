@@ -311,6 +311,9 @@
     <ClInclude Include="allocValidate.h">
       <Filter>Validation</Filter>
     </ClInclude>
+    <ClInclude Include="ListValidate.h">
+      <Filter>Validation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />

@@ -51,18 +51,24 @@ namespace TinySTL{
 		}
 		insert(position, *last);
 	}
+
+	// 分配空间创建并初始化一个List节点
 	template<class T>
 	typename list<T>::nodePtr list<T>::newNode(const T& val = T()){
 		nodePtr res = nodeAllocator::allocate();
 		nodeAllocator::construct(res, Detail::node<T>(val, nullptr, nullptr, this));
 		return res;
 	}
+
+	// 删除一个指定的节点
 	template<class T>
 	void list<T>::deleteNode(nodePtr p){
 		p->prev = p->next = nullptr; 
 		nodeAllocator::destroy(p);
 		nodeAllocator::deallocate(p);
 	}
+
+	// 构造一个链表包含n个值为val的节点
 	template<class T>
 	void list<T>::ctorAux(size_type n, const value_type& val, std::true_type){
 		head.p = newNode();//add a dummy node
@@ -70,6 +76,8 @@ namespace TinySTL{
 		while (n--)
 			push_back(val);
 	}
+
+	// 构造一个链表复制另一个链表中范围在[first，last）的值
 	template<class T>
 	template <class InputIterator>
 	void list<T>::ctorAux(InputIterator first, InputIterator last, std::false_type){
@@ -78,6 +86,8 @@ namespace TinySTL{
 		for (; first != last; ++first)
 			push_back(*first);
 	}
+
+	// 返回链表的长度
 	template<class T>
 	typename list<T>::size_type list<T>::size()const{
 		size_type length = 0;
@@ -85,11 +95,15 @@ namespace TinySTL{
 			++length;
 		return length;
 	}
+
+	// 默认构造函数
 	template<class T>
 	list<T>::list(){
 		head.p = newNode();//add a dummy node
 		tail.p = head.p;
 	}
+
+
 	template<class T>
 	list<T>::list(size_type n, const value_type& val = value_type()){
 		ctorAux(n, val, std::is_integral<value_type>());
@@ -99,6 +113,8 @@ namespace TinySTL{
 	list<T>::list(InputIterator first, InputIterator last){
 		ctorAux(first, last, std::is_integral<InputIterator>());
 	}
+
+	// 复制构造函数
 	template<class T>
 	list<T>::list(const list& l){
 		head.p = newNode();//add a dummy node
@@ -106,6 +122,8 @@ namespace TinySTL{
 		for (auto node = l.head.p; node != l.tail.p; node = node->next)
 			push_back(node->data);
 	}
+
+	// 赋值运算符重载
 	template<class T>
 	list<T>& list<T>::operator = (const list& l){
 		if (this != &l){
@@ -206,6 +224,8 @@ namespace TinySTL{
 	void list<T>::clear(){
 		erase(begin(), end());
 	}
+
+	// head pointer and tail pointer
 	template<class T>
 	typename list<T>::iterator list<T>::begin(){
 		return head;
@@ -214,6 +234,7 @@ namespace TinySTL{
 	typename list<T>::iterator list<T>::end(){
 		return tail;
 	}
+
 	template<class T>
 	typename list<T>::const_iterator list<T>::changeIteratorToConstIterator(iterator& it)const{
 		using nodeP = Detail::node<const T>*;

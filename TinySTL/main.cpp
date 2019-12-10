@@ -29,7 +29,7 @@
 
 using namespace TinySTL::Profiler;
 */
-#include "./allocValidate.h"
+#include "./ListValidate.h"
 
 int main(){
 	/*TinySTL::AlgorithmTest::testAllCases();
@@ -55,7 +55,8 @@ int main(){
 	TinySTL::UniquePtrTest::testAllCases();
 	TinySTL::Unordered_setTest::testAllCases();
 	TinySTL::VectorTest::testAllCases();*/
-	TinySTL::AllocValid::testUnionObj();
+	
+	TinySTL::ListValidate::test();
 	system("pause");
 	return 0;
 }

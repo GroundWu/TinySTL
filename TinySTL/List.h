@@ -27,6 +27,7 @@ namespace TinySTL{
 				return data == n.data && prev == n.prev && next == n.next && container == n.container;
 			}
 		};
+
 		//the class of list iterator
 		template<class T>
 		struct listIterator :public iterator<bidirectional_iterator_tag, T>{
@@ -69,6 +70,7 @@ namespace TinySTL{
 		typedef T& reference;
 		typedef size_t size_type;
 	private:
+		// 链表的头节点和尾节点
 		iterator head;
 		iterator tail;
 	public:

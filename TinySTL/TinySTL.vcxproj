@@ -136,6 +136,7 @@
     <ClInclude Include="Graph.h" />
     <ClInclude Include="Iterator.h" />
     <ClInclude Include="List.h" />
+    <ClInclude Include="ListValidate.h" />
     <ClInclude Include="Memory.h" />
     <ClInclude Include="Profiler\Profiler.h" />
     <ClInclude Include="Queue.h" />
