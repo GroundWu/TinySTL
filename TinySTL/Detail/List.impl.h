@@ -77,7 +77,7 @@ namespace TinySTL{
 			push_back(val);
 	}
 
-	// 构造一个链表复制另一个链表中范围在[first，last）的值
+	// 构造一个链表复制另一个链表中范围在[first，last]的值
 	template<class T>
 	template <class InputIterator>
 	void list<T>::ctorAux(InputIterator first, InputIterator last, std::false_type){
@@ -157,6 +157,7 @@ namespace TinySTL{
 	}
 	template<class T>
 	void list<T>::push_back(const value_type& val){
+		// 尾部添加新的空节点，原来的空节点用来填充新数据
 		auto node = newNode();
 		(tail.p)->data = val;
 		(tail.p)->next = node;
@@ -170,6 +171,8 @@ namespace TinySTL{
 		deleteNode(tail.p);
 		tail.p = newTail;
 	}
+
+	// 在pos前插入一个节点
 	template<class T>
 	typename list<T>::iterator list<T>::insert(iterator position, const value_type& val){
 		if (position == begin()){
@@ -188,15 +191,21 @@ namespace TinySTL{
 		position.p->prev = node;
 		return iterator(node);
 	}
+
+	// 在pos前插入n个值为val的节点
 	template<class T>
 	void list<T>::insert(iterator position, size_type n, const value_type& val){
 		insert_aux(position, n, val, typename std::is_integral<InputIterator>::type());
 	}
+
+	// 在pos前插入指针范围在[first,last)的节点
 	template<class T>
 	template <class InputIterator>
 	void list<T>::insert(iterator position, InputIterator first, InputIterator last){
 		insert_aux(position, first, last, typename std::is_integral<InputIterator>::type());
 	}
+
+	// 删除pos位置的节点
 	template<class T>
 	typename list<T>::iterator list<T>::erase(iterator position){
 		if (position == head){
@@ -211,6 +220,8 @@ namespace TinySTL{
 			return iterator(prev->next);
 		}
 	}
+
+	// 删除范围在[first,last)的节点
 	template<class T>
 	typename list<T>::iterator list<T>::erase(iterator first, iterator last){
 		typename list<T>::iterator res;
